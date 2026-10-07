@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-AO">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SLDALA CAFÉ BAR — café, pequeno-almoço, refeições, sumos e bons momentos em Luanda.">
+  <title>SLDALA CAFÉ BAR | O seu dia começa aqui.</title>
+
+  <style>
+    :root{
+      --dark:#17130f;
+      --dark-2:#231c16;
+      --gold:#c89b5b;
+      --gold-light:#e3c18b;
+      --cream:#f7f1e7;
+      --white:#fff;
+      --muted:#b9b0a5;
+      --card:#211a14;
+      --shadow:0 18px 50px rgba(0,0,0,.22);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--cream);
+      background:var(--dark);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    button{font:inherit}
+
+    .container{width:min(1160px,92%);margin:auto}
+
+    /* HEADER */
+    header{
+      position:fixed;
+      top:0;left:0;right:0;
+      z-index:1000;
+      transition:.3s;
+    }
+    header.scrolled{
+      background:rgba(23,19,15,.96);
+      backdrop-filter:blur(12px);
+      box-shadow:0 8px 30px rgba(0,0,0,.2);
+    }
+    .nav{
+      height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:30px;
+    }
+    .logo{
+      font-size:1.25rem;
+      font-weight:900;
+      letter-spacing:3px;
+      color:var(--white);
+    }
+    .brand{display:flex;align-items:center;gap:10px;color:white;font-weight:900;letter-spacing:2px}
+    .brand img{width:58px;height:58px;object-fit:contain}
+    .brand span{font-size:.68rem;color:var(--gold-light);letter-spacing:3px}
+    .footer-brand img{width:190px;height:auto;object-fit:contain}
+    .logo span{
+      display:block;
+      font-size:.58rem;
+      letter-spacing:4px;
+      color:var(--gold-light);
+      margin-top:-2px;
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      list-style:none;
+      font-size:.9rem;
+    }
+    .nav-links a{transition:.25s}
+    .nav-links a:hover{color:var(--gold-light)}
+    .nav-cta{
+      padding:11px 18px;
+      border:1px solid var(--gold);
+      border-radius:30px;
+      color:var(--gold-light)!important;
+    }
+    .menu-toggle{
+      display:none;
+      background:none;
+      border:0;
+      color:white;
+      font-size:1.7rem;
+      cursor:pointer;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(90deg,rgba(12,9,7,.94) 0%,rgba(12,9,7,.72) 45%,rgba(12,9,7,.24) 100%),
+        url('hero-cafe.jpg') center right/cover no-repeat;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg,rgba(17,13,10,.97) 0%,rgba(17,13,10,.78) 46%,rgba(17,13,10,.18) 100%);
+    }
+    .hero-art{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.12),transparent 60%);pointer-events:none}
+    .hero-art .cup{display:none}
+    .cup{
+      position:absolute;
+      right:24%;
+      top:28%;
+      width:210px;
+      height:150px;
+      border-radius:0 0 85px 85px;
+      background:linear-gradient(145deg,#f0dfc0,#a97942);
+      box-shadow:0 30px 50px rgba(0,0,0,.4);
+      transform:rotate(-5deg);
+    }
+    .cup:before{
+      content:"";
+      position:absolute;
+      left:15px;right:15px;top:-18px;
+      height:42px;
+      border-radius:50%;
+      background:#3a2517;
+      border:7px solid #d9b27c;
+    }
+    .cup:after{
+      content:"";
+      position:absolute;
+      right:-62px;top:28px;
+      width:75px;height:75px;
+      border:15px solid #c49a64;
+      border-left:0;
+      border-radius:0 50% 50% 0;
+    }
+    .steam{
+      position:absolute;
+      width:3px;height:85px;
+      background:linear-gradient(transparent,rgba(255,255,255,.35),transparent);
+      border-radius:50%;
+      top:-105px;
+      animation:steam 3s infinite ease-in-out;
+    }
+    .steam.one{left:55px}
+    .steam.two{left:105px;animation-delay:1s}
+    .steam.three{left:145px;animation-delay:1.8s}
+    @keyframes steam{
+      0%,100%{transform:translateY(12px) rotate(4deg);opacity:0}
+      40%{opacity:.7}
+      70%{transform:translateY(-8px) rotate(-5deg);opacity:.25}
+    }
+
+    .hero-content{position:relative;z-index:2;max-width:650px;padding:130px 0 90px}
+    .eyebrow{
+      color:var(--gold-light);
+      text-transform:uppercase;
+      letter-spacing:4px;
+      font-size:.78rem;
+      font-weight:700;
+      margin-bottom:18px;
+    }
+    h1{
+      font-family:Georgia,serif;
+      font-size:clamp(3.1rem,7vw,6rem);
+      line-height:.98;
+      font-weight:500;
+      margin-bottom:24px;
+    }
+    h1 em{color:var(--gold-light);font-style:normal}
+    .hero p{
+      max-width:580px;
+      color:#ddd3c6;
+      font-size:1.08rem;
+      margin-bottom:32px;
+    }
+    .buttons{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 24px;
+      border-radius:40px;
+      font-weight:800;
+      transition:.25s;
+      cursor:pointer;
+      border:1px solid transparent;
+    }
+    .btn-primary{background:var(--gold);color:#1b140d}
+    .btn-primary:hover{transform:translateY(-2px);background:var(--gold-light)}
+    .btn-outline{border-color:rgba(255,255,255,.3);color:white}
+    .btn-outline:hover{border-color:var(--gold-light);color:var(--gold-light)}
+
+    /* GENERAL */
+    section{padding:100px 0}
+    .section-head{text-align:center;max-width:700px;margin:0 auto 50px}
+    .section-head .eyebrow{margin-bottom:10px}
+    h2{
+      font-family:Georgia,serif;
+      font-size:clamp(2.2rem,4vw,3.5rem);
+      line-height:1.1;
+      margin-bottom:15px;
+    }
+    .section-head p{color:var(--muted)}
+    .cream-section{background:var(--cream);color:var(--dark)}
+    .dark-section{background:var(--dark)}
+    .gold-section{background:var(--gold);color:#1a130d}
+
+    /* INTRO */
+    .intro-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:70px;
+      align-items:center;
+    }
+    .intro-photo{
+      min-height:430px;
+      border-radius:var(--radius);
+      background:
+        linear-gradient(145deg,rgba(200,155,91,.15),rgba(0,0,0,.45)),
+        radial-gradient(circle at 35% 35%,#b9824a,#4d2e1b 38%,#17120e 75%);
+      position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+    }
+    .intro-photo:after{
+      content:"SLDALA";
+      position:absolute;
+      right:-35px;bottom:20px;
+      font-size:5rem;
+      font-weight:900;
+      color:rgba(255,255,255,.07);
+      transform:rotate(-90deg);
+    }
+    .intro-copy h2{margin-bottom:20px}
+    .intro-copy p{color:#62594f;margin-bottom:18px}
+    .signature{font-family:cursive;color:#9b6d35;font-size:1.5rem}
+
+    /* CATEGORIES */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.07);
+      padding:28px 22px;
+      border-radius:var(--radius);
+      transition:.3s;
+    }
+    .card:hover{transform:translateY(-7px);border-color:rgba(200,155,91,.55)}
+    .icon{font-size:2rem;margin-bottom:18px}
+    .card h3{margin-bottom:8px;font-family:Georgia,serif;font-size:1.4rem}
+    .card p{color:var(--muted);font-size:.92rem;margin-bottom:18px}
+    .card a{color:var(--gold-light);font-weight:700;font-size:.85rem}
+
+    /* MENU */
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+    .menu-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:20px 0;
+      border-bottom:1px solid #ddd3c5;
+    }
+    .menu-item h3{font-size:1rem;margin-bottom:4px}
+    .menu-item p{font-size:.85rem;color:#777}
+    .price{font-weight:900;color:#9b6d35;white-space:nowrap}
+    .menu-more{text-align:center;margin-top:38px}
+
+    /* FEATURES */
+    .features{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:30px;
+      text-align:center;
+    }
+    .feature-number{
+      font-size:2rem;
+      color:var(--dark);
+      margin-bottom:8px;
+    }
+    .feature h3{margin-bottom:8px}
+    .feature p{font-size:.9rem;opacity:.75}
+
+    /* CTA */
+    .cta{
+      text-align:center;
+      padding:90px 20px;
+      background:
+        radial-gradient(circle at 50% 0,rgba(255,255,255,.22),transparent 35%),
+        var(--gold);
+    }
+    .cta h2{max-width:700px;margin:0 auto 16px}
+    .cta p{max-width:600px;margin:0 auto 28px}
+
+    /* CONTACT */
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:start;
+    }
+    .contact-box{
+      background:#211a14;
+      border-radius:var(--radius);
+      padding:32px;
+    }
+    .contact-row{
+      padding:17px 0;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .contact-row:last-child{border-bottom:0}
+    .contact-row strong{display:block;margin-bottom:4px;color:var(--gold-light)}
+    .contact-row span{color:#ddd3c6}
+    .map-wrap{display:grid;gap:14px}
+    .map-card,.map-live{border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#211a14;box-shadow:var(--shadow)}
+    .map-card img{width:100%;height:260px;object-fit:cover}
+    .map-live iframe{width:100%;height:330px;border:0;display:block}
+    .map-button{justify-self:start}
+    .map strong{font-family:Georgia,serif;font-size:1.7rem}
+
+    /* FOOTER */
+    footer{background:#0e0c0a;padding:55px 0 25px}
+    .footer-grid{
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:40px;
+      padding-bottom:35px;
+    }
+    footer h3{margin-bottom:15px;color:var(--gold-light)}
+    footer p,footer li{color:#999;font-size:.9rem}
+    footer ul{list-style:none}
+    footer li{margin:9px 0}
+    .copyright{
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color:#777;
+      font-size:.8rem;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    /* WHATSAPP */
+    .whatsapp{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:58px;height:58px;
+      border-radius:50%;
+      background:#25D366;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.55rem;
+      z-index:999;
+      box-shadow:0 10px 25px rgba(0,0,0,.3);
+      transition:.25s;
+    }
+    .whatsapp:hover{transform:scale(1.08)}
+
+    .reveal{
+      opacity:0;
+      transform:translateY(25px);
+      transition:opacity .7s ease,transform .7s ease;
+    }
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:900px){
+      .nav-links{
+        position:absolute;
+        top:82px;left:0;right:0;
+        background:rgba(23,19,15,.98);
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        padding:20px 5%;
+      }
+      .nav-links.open{display:flex}
+      .menu-toggle{display:block}
+      .hero-art{width:90%;right:-35%;opacity:.6}
+      .intro-grid,.contact-grid{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .menu-grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:560px){
+      .nav{height:72px}
+      .nav-links{top:72px}
+      .hero-content{padding-top:120px}
+      .hero-art{opacity:.18}
+      h1{font-size:3.25rem}
+      section{padding:75px 0}
+      .cards,.features,.footer-grid{grid-template-columns:1fr}
+      .intro-photo{min-height:300px}
+      .copyright{flex-direction:column}
+      .buttons .btn{width:100%}
+    }
+  </style>
+</head>
+
+<body>
+
+<header id="header">
+  <div class="container nav">
+    <a class="brand" href="#inicio" aria-label="SLDALA Café Bar">
+      <img src="logo-sldala.png" alt="SLDALA LDA - Pensando na sua satisfação">
+      <span>CAFÉ BAR</span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre Nós</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contactos">Contactos</a></li>
+      <li><a class="nav-cta" href="#menu">Ver Menu</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-art">
+      <div class="cup">
+        <i class="steam one"></i>
+        <i class="steam two"></i>
+        <i class="steam three"></i>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content reveal">
+        <div class="eyebrow">SLDALA CAFÉ BAR • LUANDA</div>
+        <h1>O seu dia <em>começa aqui.</em></h1>
+        <p>
+          Café fresco, pequenos-almoços saborosos, refeições deliciosas,
+          sumos naturais e um ambiente pensado para aproveitar cada momento.
+        </p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="#menu">Explorar o Menu</a>
+          <a class="btn btn-outline" href="#contactos">Visitar o SLDALA</a>
+          <a class="btn btn-outline" href="https://wa.me/244925837286?text=Ol%C3%A1%21%20Vim%20pelo%20site%20do%20SLDALA%20CAF%C3%89%20BAR." target="_blank" rel="noopener">WhatsApp: 925 837 286</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="cream-section" id="sobre">
+    <div class="container intro-grid">
+      <div class="intro-photo reveal" aria-label="Imagem decorativa do SLDALA CAFÉ BAR"></div>
+
+      <div class="intro-copy reveal">
+        <div class="eyebrow">Bem-vindo</div>
+        <h2>Sabor que combina com o seu momento.</h2>
+        <p>
+          No <strong>SLDALA CAFÉ BAR</strong>, acreditamos que uma boa refeição
+          pode transformar o seu dia.
+        </p>
+        <p>
+          Criámos um espaço onde boa comida, café, bebidas e convivência se
+          encontram num ambiente agradável e descontraído.
+        </p>
+        <p>
+          Seja para começar o dia, fazer uma pausa, almoçar com amigos ou
+          simplesmente relaxar, temos um lugar para si.
+        </p>
+        <div class="signature">SLDALA CAFÉ BAR</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section class="dark-section" id="experiencia">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">O que temos para si</div>
+        <h2>Uma experiência para cada momento.</h2>
+        <p>Escolha o seu sabor e aproveite o ambiente SLDALA.</p>
+      </div>
+
+      <div class="cards">
+        <article class="card reveal">
+          <div class="icon">☕</div>
+          <h3>Café & Pequeno-Almoço</h3>
+          <p>Comece o seu dia com café, cappuccino e opções deliciosas.</p>
+          <a href="#menu">Ver opções →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🍽️</div>
+          <h3>Refeições</h3>
+          <p>Pratos saborosos para uma refeição completa e especial.</p>
+          <a href="#menu">Ver menu →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🥤</div>
+          <h3>Sumos & Bebidas</h3>
+          <p>Opções refrescantes para acompanhar os seus melhores momentos.</p>
+          <a href="#menu">Ver bebidas →</a>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon">🍰</div>
+          <h3>Doces & Sobremesas</h3>
+          <p>Um toque doce para terminar a sua experiência em grande.</p>
+          <a href="#menu">Descobrir →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="cream-section" id="menu">
+    <div class="container">
+      <div class="section-head reveal"><div class="eyebrow">Os nossos sabores</div><h2>Menu em destaque</h2><p>Pratos, cafés, doces e bebidas para acompanhar cada momento no SLDALA.</p></div>
+      <div class="menu-grid">
+        <div>
+          <div class="menu-item reveal"><div><h3>Prego no Pão</h3><p>Prático e saboroso.</p></div><div class="price">1.400 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Sande Mista</h3><p>Uma opção clássica.</p></div><div class="price">1.250 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Feijoada</h3><p>Refeição cheia de sabor.</p></div><div class="price">3.000 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Mufete</h3><p>Sabor da gastronomia angolana.</p></div><div class="price">3.500 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Cozido</h3><p>Uma refeição especial.</p></div><div class="price">3.500 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Funge com Peito Alto</h3><p>Combinação tradicional e saborosa.</p></div><div class="price">2.500 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Arroz com Churrasco e Feijão Preto</h3><p>Refeição completa e saborosa.</p></div><div class="price">2.500 Kz</div></div>
+        </div>
+        <div>
+          <div class="menu-item reveal"><div><h3>Sopa</h3><p>Quente e reconfortante.</p></div><div class="price">1.600 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Café</h3><p>O clássico.</p></div><div class="price">800 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Cappuccino</h3><p>Cremoso e aromático.</p></div><div class="price">1.200 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Pastel de Nata</h3><p>Um clássico para acompanhar o café.</p></div><div class="price">900 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Bola de Berlim</h3><p>Doce e deliciosa.</p></div><div class="price">800 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Fatia de Bolo</h3><p>Uma opção doce.</p></div><div class="price">1.000 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Sumo Natural Simples</h3><p>Fresco e natural.</p></div><div class="price">3.000 Kz</div></div>
+          <div class="menu-item reveal"><div><h3>Sumo Mixado</h3><p>Refrescante e saboroso.</p></div><div class="price">3.500 Kz</div></div>
+        </div>
+      </div>
+      <div style="margin-top:70px">
+        <div class="section-head reveal"><div class="eyebrow">Bebidas</div><h2>Para acompanhar o seu momento</h2><p>Cervejas, vinho e outras bebidas disponíveis no SLDALA CAFÉ BAR.</p></div>
+        <div class="menu-grid">
+          <div>
+            <div class="menu-item reveal"><div><h3>Cuca</h3><p>Cerveja</p></div><div class="price">500 Kz</div></div>
+            <div class="menu-item reveal"><div><h3>EKA</h3><p>Cerveja</p></div><div class="price">500 Kz</div></div>
+            <div class="menu-item reveal"><div><h3>Nocal</h3><p>Cerveja</p></div><div class="price">500 Kz</div></div>
+            <div class="menu-item reveal"><div><h3>Booster</h3><p>Cerveja</p></div><div class="price">500 Kz</div></div>
+          </div>
+          <div>
+            <div class="menu-item reveal"><div><h3>Savanna</h3><p>Bebida</p></div><div class="price">1.300 Kz</div></div>
+            <div class="menu-item reveal"><div><h3>Smirnoff</h3><p>Bebida</p></div><div class="price">1.100 Kz</div></div>
+            <div class="menu-item reveal"><div><h3>Cálice de Whisky</h3><p>Whisky</p></div><div class="price">1.500 Kz</div></div>
+            <div class="menu-item reveal"><div><h3>Copo de Vinho Tinto</h3><p>Vinho</p></div><div class="price">1.000 Kz</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-more"><a class="btn btn-primary" href="#contactos">Pedir informações pelo WhatsApp</a></div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="gold-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Porquê SLDALA?</div>
+        <h2>Mais do que um café. Um lugar para viver bons momentos.</h2>
+      </div>
+
+      <div class="features">
+        <div class="feature reveal">
+          <div class="feature-number">01</div>
+          <h3>Qualidade</h3>
+          <p>Ingredientes e preparação com atenção aos detalhes.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature-number">02</div>
+          <h3>Sabor</h3>
+          <p>Receitas pensadas para proporcionar uma experiência marcante.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature-number">03</div>
+          <h3>Atendimento</h3>
+          <p>Queremos que cada cliente se sinta bem-vindo.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="feature-number">04</div>
+          <h3>Ambiente</h3>
+          <p>Um espaço para conversar, relaxar e aproveitar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container reveal">
+      <div class="eyebrow">SLDALA CAFÉ BAR</div>
+      <h2>O seu momento. O nosso sabor.</h2>
+      <p>
+        Venha tomar um café, fazer uma refeição ou simplesmente aproveitar
+        um bom momento connosco.
+      </p>
+      <a class="btn" style="background:#17130f;color:white" href="#contactos">Encontrar o SLDALA</a>
+    </div>
+  </section>
+
+  <!-- CONTACTOS -->
+  <section class="dark-section" id="contactos">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Faça-nos uma visita</div>
+        <h2>Estamos à sua espera.</h2>
+        <p>Entre em contacto connosco para informações, reservas ou encomendas.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-box reveal">
+          <div class="contact-row">
+            <strong>📍 Localização</strong>
+            <span>Estrada Deolinda Rodrigues, Luanda, Angola</span>
+          </div>
+          <div class="contact-row">
+            <strong>📱 WhatsApp</strong>
+            <span id="phoneDisplay">+244 925 837 286</span>
+          </div>
+          <div class="contact-row">
+            <strong>📸 Instagram</strong>
+            <a href="https://www.instagram.com/sldala6?stkn=Z2MweHhocWJhYWRy" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">@sldala6</a>
+          </div>
+          <div class="contact-row">
+            <strong>🕐 Horário</strong>
+            <span>Consulte-nos para o horário atualizado.</span>
+          </div>
+          <br>
+          <a id="whatsappButton" class="btn btn-primary" href="#" target="_blank" rel="noopener">
+            Falar no WhatsApp
+          </a>
+        </div>
+
+        <div class="map-wrap reveal">
+          <div class="map-card">
+            <img src="Artboard 4.jpg.jpeg" alt="Mapa com a localização do SLDALA Café Bar na Avenida Deolinda Rodrigues">
+          </div>
+          <div class="map-live">
+            <iframe
+              title="Google Maps - SLDALA Café Bar"
+              src="https://www.google.com/maps?q=SLDALA%20Cafe%20Bar%20Avenida%20Deolinda%20Rodrigues%20Luanda%20Angola&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <a class="btn btn-primary map-button" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=SLDALA%20Cafe%20Bar%20Avenida%20Deolinda%20Rodrigues%20Luanda%20Angola">
+            Abrir no Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand"><img src="logo-sldala.png" alt="SLDALA LDA"></div>
+        <div style="color:var(--gold-light);font-size:.7rem;letter-spacing:3px;margin-top:8px">CAFÉ BAR • LUANDA</div>
+        <p style="margin-top:16px">
+          Pensando na sua satisfação. Café, refeições, bebidas e bons momentos num só lugar.
+        </p>
+      </div>
+
+      <div>
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#contactos">Contactos</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Siga-nos</h3>
+        <ul>
+          <li><a href="https://www.instagram.com/sldala6?stkn=Z2MweHhocWJhYWRy" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#contactos">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <span>© <span id="year"></span> SLDALA CAFÉ BAR. Todos os direitos reservados.</span>
+      <span>Sabor que fica na memória.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp" id="floatingWhatsapp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+
+<script>
+  // ==============================
+  // CONFIGURAÇÃO DO SITE
+  // ==============================
+  // SUBSTITUA pelo número oficial do WhatsApp do SLDALA,
+  // usando o formato internacional, sem +, espaços ou traços.
+  const WHATSAPP_NUMBER = "244925837286";
+
+  const whatsappMessage = encodeURIComponent(
+    "Olá! Vim pelo site do SLDALA CAFÉ BAR e gostaria de obter mais informações."
+  );
+
+  const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+  document.getElementById("whatsappButton").href = whatsappURL;
+  document.getElementById("floatingWhatsapp").href = whatsappURL;
+
+  // Ano automático
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Header ao fazer scroll
+  const header = document.getElementById("header");
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 30);
+  });
+
+  // Menu mobile
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+    menuToggle.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+  });
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.textContent = "☰";
+    });
+  });
+
+  // Animações ao entrar no ecrã
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12});
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
